@@ -16,8 +16,7 @@ public class EDDPractica1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("prueba de commit en github");
-        System.out.print("Hola");
+   
 
     }        
 }
