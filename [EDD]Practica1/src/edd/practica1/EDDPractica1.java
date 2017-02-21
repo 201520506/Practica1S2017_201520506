@@ -13,10 +13,15 @@ public class EDDPractica1 {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-   
+    public static void main(String[] args) throws Exception {
+       
+        Lista lista = new Lista();
+        Cola c = new Cola();
+        
+        
+    }   
 
-    }        
+      
 }

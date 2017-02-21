@@ -19,6 +19,8 @@ public class Nodo {
         this.valor = 0;
         this.siguiente = null;
     }
+
+    
     public Integer getValor() {
         return valor;
     }
