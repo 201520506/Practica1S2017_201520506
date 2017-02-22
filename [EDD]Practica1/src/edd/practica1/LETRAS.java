@@ -12,34 +12,19 @@ import java.util.Random;
  * @author LuisGui
  */
 public class LETRAS {
-
-    public String getLetra() {
-        return letra;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setLetra(String letra) {
-        this.letra = letra;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-//
-//    public LETRAS() {
-//        this.letra = "";
-//        this.cantidad = 0;
-//    }
-
-    public LETRAS(String letra, int cantidad) {
-        this.letra = letra;
-        this.cantidad = cantidad;
-    }
-   String letra;
-   int cantidad;
+Lista l = new Lista();
+   char letras[] = new char[7];
+         public void aleatorio(){
+          char[] letra={'A','B','C','D','E','F','G','H','I','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    
+         Random rnd = new Random();
+          int x;
+          for (int i = 0; i < 7; i++) {
+              x = (int)(rnd.nextDouble() * 10.0);
+              letras[i]=(letra[x]);
+              l.insertar(letra[i]);              
+     }
+         }
    
    
     
