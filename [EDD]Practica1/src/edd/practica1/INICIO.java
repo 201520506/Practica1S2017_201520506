@@ -5,10 +5,14 @@
  */
 package edd.practica1;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 import org.jespxml.JespXML;
 import org.jespxml.excepciones.TagHijoNotFoundException;
@@ -77,11 +81,23 @@ public class INICIO extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-       
-       
-        JespXML xml = new JespXML(new File("biblioteca.xml"));
+ JFileChooser fc=new JFileChooser();
+ 
+//Abrimos la ventana, guardamos la opcion seleccionada por el usuario
+int seleccion=fc.showOpenDialog(this);
+ 
+//Si el usuario, pincha en aceptar
+if(seleccion==JFileChooser.APPROVE_OPTION){
+ 
+    //Seleccionamos el fichero
+    File fichero=fc.getSelectedFile();
+ 
+    //Ecribe la ruta del fichero seleccionado en el campo de texto
+  
+  
+        JespXML xml = new JespXML(new File(fichero.getAbsolutePath()));
         try {
             Tag raiz = xml.leerXML();
             
@@ -104,18 +120,19 @@ public class INICIO extends javax.swing.JFrame {
                 Tag diccionario = raiz .getTagHijoByName("diccionario");
                
             for (int i =0 ;i < diccionario.getTagsHijos().size() ;i++){
-                System.out.println(diccionario.getTagsHijos().get(i).getContenido());
-               lista.agregarAlFinal(diccionario.getTagsHijos().get(i).getContenido());
-              }
+             lista.insertar(diccionario.getTagsHijos().get(i).getContenido());
+             System.out.println(diccionario.getTagsHijos().get(i).getContenido());
+                     }
          
             
             
          
         } catch (Exception ex) {
             System.out.println(ex);
-           //Logger.getLogger(PruebaJespXML11.class.getName()).log(Level.SEVERE, null, ex);
+           
         } 
-    
+        
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

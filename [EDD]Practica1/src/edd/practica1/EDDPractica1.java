@@ -16,10 +16,15 @@ public class EDDPractica1 {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-       
+     INICIO inicio =new INICIO();
+     inicio.setVisible(true);
    
     }   
     
+    public String aletarotio (){
+        
+        return "";
+    }
     
 
       
