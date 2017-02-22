@@ -13,6 +13,11 @@ package edd.practica1;
 public class Cola {
      private Nodo primero;
 
+    public int getTamaño() {
+        return tamaño;
+    }
+     int tamaño ;
+
     public void push(Object nowell) {
         Nodo nuevo = new Nodo();
         nuevo.setValor(nowell);
@@ -25,6 +30,7 @@ public class Cola {
             }
             actual.setSiguiente(nuevo);
         }
+        tamaño=tamaño+1;
     }
 
     public Object pop() {
