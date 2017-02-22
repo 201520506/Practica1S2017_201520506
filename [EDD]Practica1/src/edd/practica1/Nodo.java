@@ -9,10 +9,8 @@ package edd.practica1;
  *
  * @author LuisGui
  */
-public class Nodo {
-
-  
-    int valor;
+public class Nodo {  
+    Object valor;
     Nodo siguiente; 
     
     public Nodo() {
@@ -21,7 +19,7 @@ public class Nodo {
     }
 
     
-    public Integer getValor() {
+    public Object getValor() {
         return valor;
     }
 
@@ -29,7 +27,7 @@ public class Nodo {
         return siguiente;
     }
   
-       public void setValor(int valor) {
+       public void setValor(Object valor) {
         this.valor = valor;
     }
 

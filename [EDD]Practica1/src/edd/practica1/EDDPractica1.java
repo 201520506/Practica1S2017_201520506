@@ -17,11 +17,10 @@ public class EDDPractica1 {
      */
     public static void main(String[] args) throws Exception {
        
-        Lista lista = new Lista();
-        Cola c = new Cola();
-        
-        
+   
     }   
+    
+    
 
       
 }

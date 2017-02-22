@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package edd.practica1;
-import edd.practica1.Nodo;
+
 
 /**
  *
@@ -13,8 +13,9 @@ import edd.practica1.Nodo;
 public class Cola {
      private Nodo primero;
 
-    public void push() {
+    public void push(Object nowell) {
         Nodo nuevo = new Nodo();
+        nuevo.setValor(nowell);
         if (this.primero == null) {
             this.primero = nuevo;
         } else {
@@ -26,7 +27,10 @@ public class Cola {
         }
     }
 
-    public void pop() {
-        this.primero = this.primero.getSiguiente() != null ? this.primero.getSiguiente() : null;
+    public Object pop() {
+        Nodo Aux;
+        Aux = this.primero;
+        this.primero = this.primero.getSiguiente();
+        return Aux.getValor();        
     }
 }

@@ -41,7 +41,7 @@ public class Lista {
      * Agrega un nuevo nodo al final de la lista.
      * @param valor a agregar.
      */
-    public void agregarAlFinal(int valor){
+    public void agregarAlFinal(Object valor){
         // Define un nuevo nodo.
         Nodo nuevo = new Nodo();
         // Agrega al valor al nodo.
@@ -88,38 +88,8 @@ public class Lista {
         // Incrementa el contador de tamaño de la lista.
         tamaño++;
     }
-    /**
-     * Inserta un nuevo nodo despues de otro, ubicado por el valor que contiene.
-     * @param referencia valor del nodo anterios al nuevo nodo a insertar.
-     * @param valor del nodo a insertar.
-     */
-    public void insertarPorReferencia(int referencia, int valor){
-        // Define un nuevo nodo.
-        Nodo nuevo = new Nodo();
-        // Agrega al valor al nodo.
-        nuevo.setValor(valor);
-        // Verifica si la lista contiene elementos
-        if (!esVacia()) {
-            // Consulta si el valor existe en la lista.
-            if (buscar(referencia)) {
-                // Crea ua copia de la lista.
-                Nodo aux = inicio;
-                // Recorre la lista hasta llegar al nodo de referencia.
-                while (aux.getValor() != referencia) {
-                    aux = aux.getSiguiente();
-                }
-                // Crea un respaldo de la continuación de la lista.
-                Nodo siguiente = aux.getSiguiente();
-                // Enlaza el nuevo nodo despues del nodo de referencia.
-                aux.setSiguiente(nuevo);
-                // Une la continuacion de la lista al nuevo nodo.
-                nuevo.setSiguiente(siguiente);
-                
-                // Incrementa el contador de tamaño de la lista.
-                tamaño++;
-            }
-        }
-    }
+
+ 
     /**
      * Inserta un nuevo nodo despues en una posición determinada.
      * @param posicion en la cual se va a insertar el nuevo nodo.
@@ -182,7 +152,7 @@ public class Lista {
             // Consulta si la posicion es el inicio de la lista.
             if (posicion == 0) {
                 // Retorna el valor del inicio de la lista.
-                return inicio.getValor();
+                return (int) inicio.getValor();
             }else{
                 // Crea una copia de la lista.
                 Nodo aux = inicio;
@@ -191,7 +161,7 @@ public class Lista {
                     aux = aux.getSiguiente();
                 }
                 // Retorna el valor del nodo.
-                return aux.getValor();
+                return (int) aux.getValor();
             }
         // Crea una excepción de Posicion inexistente en la lista.
         } else {
@@ -203,7 +173,7 @@ public class Lista {
      * @param referencia valor a buscar.
      * @return true si existe el valor en la lista.
      */
-    public boolean buscar(int referencia){
+    public boolean buscar(Object referencia){
         // Crea una copia de la lista.
         Nodo aux = inicio;
         // Bandera para indicar si el valor existe.
@@ -230,7 +200,7 @@ public class Lista {
      * @return un valor entero entre [0,n] que indica la posición del nodo. 
      * @throws Exception 
      */
-    public int getPosicion(int referencia) throws Exception{
+    public int getPosicion(Object referencia) throws Exception{
         // Consulta si el valor existe en la lista.
         if (buscar(referencia)) {
             // Crea una copia de la lista.
@@ -257,7 +227,7 @@ public class Lista {
      * @param referencia valor del nodo el cual se desea actualizar.
      * @param valor nuevo valor para el nodo.
      */
-    public void editarPorReferencia(int referencia, int valor){
+    public void editarPorReferencia(Object referencia, int valor){
         // Consulta si el valor existe en la lista.
         if (buscar(referencia)) {
             // Crea ua copia de la lista.
@@ -303,7 +273,7 @@ public class Lista {
      * por un valor de referencia.
      * @param referencia valor del nodo que se desea eliminar.
      */
-    public void removerPorReferencia(int referencia){
+    public void removerPorReferencia(Object referencia){
         // Consulta si el valor de referencia existe en la lista.
         if (buscar(referencia)) {
             // Consulta si el nodo a eliminar es el pirmero

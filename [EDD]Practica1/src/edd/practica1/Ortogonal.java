@@ -10,5 +10,8 @@ package edd.practica1;
  * @author LuisGui
  */
 public class Ortogonal {
+ 
+    
+    
     
 }
