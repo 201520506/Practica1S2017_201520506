@@ -5,6 +5,14 @@
  */
 package edd.practica1;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author LuisGui
@@ -144,6 +152,11 @@ public class JUEGO extends javax.swing.JFrame {
         jLabel7.setText("AREA DE REPORTES");
 
         jButton11.setText("LISTA DICCIONARIO");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("LISTA DE LAS FICHAS ACTIVAS");
 
@@ -242,13 +255,14 @@ public class JUEGO extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -268,10 +282,11 @@ public class JUEGO extends javax.swing.JFrame {
                             .addComponent(jButton11)
                             .addComponent(jButton12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton14)
-                            .addComponent(jButton13)
-                            .addComponent(jButton15))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton13)
+                                .addComponent(jButton15)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -303,6 +318,65 @@ public class JUEGO extends javax.swing.JFrame {
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
 
     }//GEN-LAST:event_jCheckBox5ActionPerformed
+private void imprimirDiccionario(String nombre) {
+       Lista l = new Lista();
+       
+    String codigo = "";
+        for (int i=0; i<l.getTamaño()-1;i++){
+            codigo = codigo+"\n" +l.getValor(i)+"->"+l.getValor(i+1)+";\n";
+        }
+        codigo = codigo+"}";
+        try {
+                CrearTxt("digraph g{\n" +
+"  rankdir=LR;"+codigo, nombre);
+            } catch (IOException ex) {
+            }
+            generarGrafica(nombre);
+            jLabel2.setIcon(new ImageIcon("C:\\Users\\luisg\\Desktop\\IMAGEN"+nombre+".jpg"));
+            this.repaint();
+    }
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        imprimirDiccionario("Lista simple");
+        
+    }
+    static void CrearTxt(String codigo,String nomArchivo) throws IOException{
+        String ruta = "C:\\Users\\luisg\\Desktop\\IMAGEN"+nomArchivo+".txt";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        if(archivo.exists()) {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write(codigo);
+        } else {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write(codigo);
+        }
+        bw.close();
+    }
+    public static void generarGrafica(String nombre){
+        try {
+            //path del dot.exe,por lo general es la misma, pero depende de donde hayas instalado el paquete de Graphviz
+            String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+            //path del archivo creado con el codigo del graphviz que queremos
+            String fileInputPath = "C:\\Users\\luisg\\Desktop\\IMAGEN"+nombre+".txt";
+            //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
+            String fileOutputPath = "C:\\Users\\luisg\\Desktop\\IMAGEN"+nombre+".jpg";
+            //tipo de imagen de salida, en este caso es jpg
+            String tParam = "-Tjpg";
+            String tOParam = "-o";
+            //recordemos el comando en la consola de windows: C:\Archivos de programa\Graphviz 2.21\bin\dot.exe -Tjpg grafo1.txt -o grafo1.jpg Esto es lo que concatenamos en el vector siguiente:
+            String[] cmd = new String[5];
+            cmd[0] = dotPath;
+            cmd[1] = tParam;
+            cmd[2] = fileInputPath;
+            cmd[3] = tOParam;
+            cmd[4] = fileOutputPath;
+            Runtime rt = Runtime.getRuntime();
+            rt.exec( cmd );
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+    
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments

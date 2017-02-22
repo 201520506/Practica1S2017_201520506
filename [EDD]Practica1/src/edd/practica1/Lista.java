@@ -17,11 +17,16 @@ import java.util.Random;
 public class Lista {
        private Nodo primero;
 
+    public int getTamaño() {
+        return tamaño;
+    }
+       int tamaño;
+
     public Nodo getPrimero() {
         return primero;
     }
 
-    public int getValor() {
+    public int getValor(int numero) {
         return valor;
     }
 

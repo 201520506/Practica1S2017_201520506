@@ -22,7 +22,8 @@ Lista l = new Lista();
           for (int i = 0; i < 7; i++) {
               x = (int)(rnd.nextDouble() * 10.0);
               letras[i]=(letra[x]);
-              l.insertar(letra[i]);              
+              l.insertar(letra[i]);     
+              
      }
          }
    
